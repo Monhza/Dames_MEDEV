@@ -9,9 +9,18 @@ public class Pion {
     private int posY;
     private boolean dame;
 
+    public boolean isDame() {
+        return dame;
+    }
+
+    public void setDame(boolean dame) {
+        this.dame = dame;
+    }
+
     public Pion(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
+        this.dame = false;
     }
 
     public List<Pion> coupsPossibles(){

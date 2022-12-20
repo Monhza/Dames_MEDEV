@@ -8,7 +8,7 @@ public class Coup {
     public Pion pionImplique;
     public List<Pion> pionsAdverses;
     public List<Pion> pionsManges;
-    private Coup coupPrecedent;
+    private Coup coupPrecedent; //Variable jamais lue ? -vince
     public Boolean obligatoire;
     public Boolean etape;
 
