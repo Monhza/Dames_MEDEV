@@ -8,16 +8,36 @@ public class Jeu {
     public String messageFin;
     private Plateau plateauJeu;
 
-    public void Jeu() {
-        
+    /**
+     * constructeur de Jeu
+     * appelle le constructeur par défaut de plateau
+     */
+    public Jeu() {
+        this.jeuEnCours = true;
+        this.messageFin = "c'est finiiiiiiiiiiiiiiii";
+        this.plateauJeu = new Plateau();
     }
 
+    
+    
+    /**
+     * à appeler dans main pour jouer
+     * contient la boucle dans laquelle on enchaine les tours de jeu
+     */
     public void runJeu() {
-
-    }
-
-    public void joueTour() {
-
+        //on met un compteur de tours
+        int tour = 0;
+        while (tour < 100) { //limite arbitraire de tours
+            tour += 1;
+            System.out.println("------------------------------------------------------------"); //on sépare les tours par des lignes pour y voir plus clair
+            System.out.println("début du tour " + tour);
+            affiche();
+            System.out.println("tour du joueur blanc");
+            plateauJeu.getJoueurB().joueTour();
+            System.out.println("tour du joueur noir");
+            plateauJeu.getJoueurN().joueTour();
+            //FIXME
+        }
     }
 
     /**
@@ -64,6 +84,7 @@ public class Jeu {
     
     /**
      * Méthode qui retourne le pion situé aux coordonnées x, y dans la liste de pions, ou null s'il n'y a pas de pion à ces coordonnées
+     * utile pour l'affichage
      */
     private Pion getPion(List<Pion> pions, int x, int y) {
         for (Pion pion : pions) {
@@ -75,7 +96,7 @@ public class Jeu {
     }
 
     /**
-     * 
+     * ça sert à quoi ?
      */
     public void resteDeuxCouleurs() {
 

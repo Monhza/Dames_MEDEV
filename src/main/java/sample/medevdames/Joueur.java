@@ -7,17 +7,24 @@ public class Joueur {
 
     private String petitNom;
     private String couleurPions;
-    private Plateau plateauJeu;
 
-    public Joueur(String petitNom) {
+    /**
+     * constructeur de Joueur
+     * @param petitNom nom du joueur
+     * @param couleurPions "blanc" ou "noir"
+     */
+    public Joueur(String petitNom, String couleurPions) {
+        //on appelera ça dans le constructeur du plateau dans lequel l'assignation de couleurs sera gérée
         this.petitNom = petitNom;
+        this.couleurPions = couleurPions;
     }
-
+ 
+    //?
     public boolean joueTour() {
-
         return true;
     }
 
+    //FIXME on propose des mouvements possibles aux joueurs du coup ?
     private void proposeMouvement() {
 
     }
@@ -26,6 +33,7 @@ public class Joueur {
 
     }
 
+    //FIXME renvoie une liste de pions ?
     public List<Pion> getCoupsPossibles(){
 
         return new ArrayList<>();
@@ -45,13 +53,5 @@ public class Joueur {
 
     public void setCouleurPions(String couleurPions) {
         this.couleurPions = couleurPions;
-    }
-
-    public Plateau getPlateauJeu() {
-        return plateauJeu;
-    }
-
-    public void setPlateauJeu(Plateau plateauJeu) {
-        this.plateauJeu = plateauJeu;
     }
 }
