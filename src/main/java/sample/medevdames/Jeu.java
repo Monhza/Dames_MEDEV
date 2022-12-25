@@ -1,9 +1,13 @@
 package sample.medevdames;
 
 import java.util.List;
+import java.util.Scanner;
 
+/**
+ * Classe qui permet de gérer un jeu de dames
+ */
 public class Jeu {
-    public static int TAILLE_PLATEAU;
+    public static int TAILLE_PLATEAU = 10;
     public boolean jeuEnCours;
     public String messageFin;
     private Plateau plateauJeu;
@@ -14,8 +18,8 @@ public class Jeu {
      */
     public Jeu() {
         this.jeuEnCours = true;
-        this.messageFin = "c'est finiiiiiiiiiiiiiiii";
         this.plateauJeu = new Plateau();
+        this.initialiseJoueurs();
     }
 
     
@@ -25,19 +29,44 @@ public class Jeu {
      * contient la boucle dans laquelle on enchaine les tours de jeu
      */
     public void runJeu() {
-        //on met un compteur de tours
-        int tour = 0;
-        while (tour < 100) { //limite arbitraire de tours
-            tour += 1;
+        while (true) {
             System.out.println("------------------------------------------------------------"); //on sépare les tours par des lignes pour y voir plus clair
-            System.out.println("début du tour " + tour);
             affiche();
-            System.out.println("tour du joueur blanc");
-            plateauJeu.getJoueurB().joueTour();
-            System.out.println("tour du joueur noir");
-            plateauJeu.getJoueurN().joueTour();
-            //FIXME
+            System.out.println("Tour du joueur blanc");
+            System.out.println(plateauJeu.getJoueurB().getPetitNom() + " c'est a toi");
+            System.out.println();
+            // Si la méthode joue tour renvoie false, ça veut dire qu'aucun mouvement de la part du joueur n'est possible
+            // C'est soit qu'il n'a plus de pions, soit qu'il est bloqué
+            // Dans les deux cas, c'est le joueur adverse qui gagne
+            if (!plateauJeu.getJoueurB().joueTour()){
+                //FIXME si cette boucle se déclenche, il faut trouver la cause de fin et la donner dans messageFin
+                break;
+            }
+
+            System.out.println("------------------------------------------------------------");
+            affiche();
+            System.out.println("Tour du joueur noir\n");
+            System.out.println(plateauJeu.getJoueurN().getPetitNom() + " c'est a toi");
+            System.out.println();
+            if (!plateauJeu.getJoueurN().joueTour()){
+                //FIXME si cette boucle se déclenche, il faut trouver la cause de fin et la donner dans messageFin
+                break;
+            }
         }
+    }
+
+    /**
+     * Méthode qui initialise les paramètres des joueurs
+     * Dans cette version, ce sont les joueurs qui choisissent leur couleur
+     * FIXME Trop top ton truc. T'as la foi dde faire l'affichage dasn une frame à part (voir JPanel de Java)
+     */
+    private void initialiseJoueurs(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Qui sont les joueurs ? ");
+        System.out.print("Joueur Blanc : ");
+        plateauJeu.getJoueurB().setPetitNom(scan.next());
+        System.out.print("Joueur Noir : ");
+        plateauJeu.getJoueurN().setPetitNom(scan.next());
     }
 
     /**
@@ -51,7 +80,7 @@ public class Jeu {
         for (int i = 0; i < TAILLE_PLATEAU; i++) {
           // On parcourt toutes les colonnes du plateau
           for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            // On cherche si il y a un pion blanc ou noir à ces coordonnées
+            // On cherche s'il y a un pion blanc ou noir à ces coordonnées
             Pion pionBlanc = getPion(plateauJeu.getPionB(), i, j);
             Pion pionNoir = getPion(plateauJeu.getPionN(), i, j);
             // Si on a trouvé un pion blanc, on affiche le caractère correspondant
@@ -97,8 +126,19 @@ public class Jeu {
 
     /**
      * ça sert à quoi ?
+     * TODO look here
+     * C'est une méthode qui permet de vérifier qu'il y a encore les deux couleurs sur le plateau
+     * Si non, il change le message de fin pour donner la raison de l'arret du jeu
      */
     public void resteDeuxCouleurs() {
 
+    }
+
+    /**
+     * Trouve la cause de la fin du jeu et change le message de fin
+     * //TODO à faire
+     */
+    private void ecrireMessageFin(){
+        this.messageFin = "Joyeux noel";
     }
 }
