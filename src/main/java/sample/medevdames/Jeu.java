@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Jeu {
     public static int TAILLE_PLATEAU = 10;
     public boolean jeuEnCours;
-    public String messageFin;
+    //public String messageFin; //suppression de cet attribut qui complique les choses pour trouver et afficher la fin -vince
     private Plateau plateauJeu;
 
     /**
@@ -40,6 +40,7 @@ public class Jeu {
             // Dans les deux cas, c'est le joueur adverse qui gagne
             if (!plateauJeu.getJoueurB().joueTour()){
                 //FIXME si cette boucle se déclenche, il faut trouver la cause de fin et la donner dans messageFin
+                ecrireMessageFin("blanc");
                 break;
             }
 
@@ -50,6 +51,7 @@ public class Jeu {
             System.out.println();
             if (!plateauJeu.getJoueurN().joueTour()){
                 //FIXME si cette boucle se déclenche, il faut trouver la cause de fin et la donner dans messageFin
+                ecrireMessageFin("noir");
                 break;
             }
         }
@@ -125,20 +127,23 @@ public class Jeu {
     }
 
     /**
-     * ça sert à quoi ?
-     * TODO look here
      * C'est une méthode qui permet de vérifier qu'il y a encore les deux couleurs sur le plateau
-     * Si non, il change le message de fin pour donner la raison de l'arret du jeu
+     * Si non, elle renvoie false
+     * @return true s'il reste des pions des deux couleurs
      */
-    public void resteDeuxCouleurs() {
-
+    public boolean resteDeuxCouleurs() {
+        return !plateauJeu.getPionB().isEmpty() && !plateauJeu.getPionB().isEmpty();
     }
 
     /**
-     * Trouve la cause de la fin du jeu et change le message de fin
-     * //TODO à faire
+     * Trouve la cause de la fin du jeu et affiche le message de fin
      */
-    private void ecrireMessageFin(){
-        this.messageFin = "Joyeux noel";
+    private void ecrireMessageFin(String couleur){
+        if (resteDeuxCouleurs()){
+            System.out.println("le joueur " + couleur + " a perdu car il n'a plus de coups valides !");
+        }
+        else {
+            System.out.println("le joueur " + couleur + " a gagné car son adversaire n'a plus de pions !");
+        }
     }
 }

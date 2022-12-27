@@ -45,6 +45,10 @@ public class Coup {
 
     }
 
+    /**
+     * constructeur de copie
+     * @param coup coup à copier
+     */
     public Coup(Coup coup) {
         this.pionImplique = coup.pionImplique;
         this.X = coup.X;
@@ -96,7 +100,7 @@ public class Coup {
         int x = this.X;
         int y = this.Y;
 
-        int[] direction = new int[]{0, 1, 2, 3};;
+        int[] direction = new int[]{0, 1, 2, 3};
         int[] facteur;
         // Les prises peuvent se faire en avant et en arrière. Pour les dames mais aussi pour les pions
         if (!pionImplique.isDame()) {
