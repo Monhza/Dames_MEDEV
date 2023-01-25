@@ -132,7 +132,7 @@ public class Jeu {
      * @return true s'il reste des pions des deux couleurs
      */
     public boolean resteDeuxCouleurs() {
-        return !plateauJeu.getPionB().isEmpty() && !plateauJeu.getPionB().isEmpty();
+        return !plateauJeu.getPionB().isEmpty() && !plateauJeu.getPionN().isEmpty();
     }
 
     /**
