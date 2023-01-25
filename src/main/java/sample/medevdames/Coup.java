@@ -97,9 +97,6 @@ public class Coup {
 
         List<Coup> listCoupsPrise = new ArrayList<>();
 
-        int x = this.X;
-        int y = this.Y;
-
         int[] direction = new int[]{0, 1, 2, 3};
         int[] facteur;
         // Les prises peuvent se faire en avant et en arrière. Pour les dames mais aussi pour les pions
